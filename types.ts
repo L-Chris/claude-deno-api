@@ -17,7 +17,65 @@ export declare namespace OpenAI {
         text?: string
     }
     
-    interface CompletionChunk {}
+    interface CompletionChunk {
+        id: string
+        model: string
+        object: string
+        citations: string[]
+        created: number
+        choices: {
+          index: number
+          message?: {
+            role: 'assistant' | 'user'
+            content: string
+            reasoning_content?: string
+            tool_calls?: ToolCall[]
+          }
+          delta?: {
+            role: 'assistant' | 'user'
+            content: string
+            reasoning_content?: string
+            tool_calls?: ToolCall[]
+          }
+          finish_reason: null | 'stop'
+        }[]
+        usage?: {
+          prompt_tokens: number
+          completion_tokens: number
+          total_tokens: number
+        }
+        error?: {
+            message: string
+            type: string
+        }
+    }
+
+    interface Tool {
+        type: 'function'
+        function: {
+          name: string
+          description: string
+          parameters: {
+            type: 'object'
+            properties: Record<string, {
+                type: string
+                description: string
+            }>
+            required: string[]
+            additionalProperties: boolean
+          }
+          strict: boolean
+        }
+    }
+
+    interface ToolCall {
+        id: string
+        type: 'function'
+        function: {
+          name: string
+          arguments: string
+        }
+    }
 
     interface ModelConfig {
         name: string

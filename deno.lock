@@ -2,7 +2,9 @@
   "version": "4",
   "specifiers": {
     "jsr:@hono/hono@^4.7.2": "4.7.2",
-    "npm:lodash@^4.17.21": "4.17.21"
+    "npm:eventsource-parser@3": "3.0.0",
+    "npm:lodash@^4.17.21": "4.17.21",
+    "npm:tokenx@~0.4.1": "0.4.1"
   },
   "jsr": {
     "@hono/hono@4.7.2": {
@@ -10,8 +12,14 @@
     }
   },
   "npm": {
+    "eventsource-parser@3.0.0": {
+      "integrity": "sha512-T1C0XCUimhxVQzW4zFipdx0SficT651NnkR0ZSH3yQwh+mFMdLfgjABVi4YtMTtaL4s168593DaoaRLMqryavA=="
+    },
     "lodash@4.17.21": {
       "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+    },
+    "tokenx@0.4.1": {
+      "integrity": "sha512-LCMniis0WsHel07xh3K9OIt5c9Xla1awtOoWBmUHZBQR7pvTvgGFuYpLiCZWohXPC1YuZORnN0+fCVYI/ie8Jg=="
     }
   },
   "workspace": {
