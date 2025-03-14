@@ -25,6 +25,7 @@ export class ChunkParser {
     })
   }
 
+  // 根据对接模型修改
   private parse (e: EventSourceMessage) {
     if (e.event !== 'data') return
 
@@ -39,6 +40,14 @@ export class ChunkParser {
     } catch (err) {
       this.send({ error: err instanceof Error ? err.message : 'unknown error' })
     }
+  }
+
+  // 根据对接模型修改
+  private getChunkType (chunk: Claude.CompletionChunk) {
+    if (chunk.type === 'message_start') return CHUNK_TYPE.START
+    if (chunk.type === 'content_block_delta') return CHUNK_TYPE.TEXT
+    if (chunk.type === 'message_stop') return CHUNK_TYPE.DONE
+    return CHUNK_TYPE.NONE
   }
 
   private async read (req: Response) {
@@ -114,13 +123,6 @@ export class ChunkParser {
 
     const data = this.encoder.encode(`data: ${JSON.stringify(message)}\n\n`)
     this.streamController.enqueue(data)
-  }
-
-  private getChunkType (chunk: Claude.CompletionChunk) {
-    if (chunk.type === 'message_start') return CHUNK_TYPE.START
-    if (chunk.type === 'content_block_delta') return CHUNK_TYPE.TEXT
-    if (chunk.type === 'message_stop') return CHUNK_TYPE.DONE
-    return CHUNK_TYPE.NONE
   }
 
   getStream() {
