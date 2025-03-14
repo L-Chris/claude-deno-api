@@ -29,7 +29,7 @@ export async function createCompletionStream (params: {
   config: OpenAI.ModelConfig
 }) {
   const req = await fetch(
-    `https://claude.ai/api/organizations/${Deno.env(
+    `https://claude.ai/api/organizations/${Deno.env.get(
       'organizationId'
     )}/chat_conversations/${params.chat_id}/completion`,
     {
